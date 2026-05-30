@@ -1,1 +1,7 @@
+node_modules/
+.env
+dist/
 .vercel
+*.log
+uploads/
+.DS_Store

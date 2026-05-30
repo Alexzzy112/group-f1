@@ -1,16 +1,18 @@
 {
   "name": "nacos-election-system",
-  "version": "1.0.0",
-  "description": "Backend server for Election System for NACOS",
-  "main": "server.js",
+  "version": "2.0.0",
+  "description": "NACOS Online Election Voting System - Full stack with React + Express + MongoDB",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "server:dev": "nodemon server/server.js",
+    "client": "cd client && npm run dev",
+    "client:build": "cd client && npm run build",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.4"
-  },
-  "engines": {
-    "node": ">=18"
+    "concurrently": "^8.2.2"
   }
 }
