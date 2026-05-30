@@ -10,7 +10,7 @@ const MATRIC_PATTERN = /^FT\d{2}CMP\d{4}$/i;
 
 export default function Register() {
   const [form, setForm] = useState({
-    fullName: '', matricNumber: '', department: '', level: '', email: '', password: '', confirmPassword: '',
+    fullName: '', matricNumber: '', department: 'Computer Science', level: '', email: '', password: '', confirmPassword: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const { register } = useAuth();
@@ -79,7 +79,6 @@ export default function Register() {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Department</label>
               <input type="text" value="Computer Science" className="input-field bg-gray-100 dark:bg-gray-600 cursor-not-allowed" disabled />
-              <input type="hidden" name="department" value="Computer Science" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Level</label>
