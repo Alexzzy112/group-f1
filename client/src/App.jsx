@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
+import AdBanner from './components/AdBanner';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 import Home from './pages/Home';
@@ -43,6 +43,7 @@ export default function App() {
           <Route path="/admin/audit" element={<ProtectedRoute adminOnly><AuditLogs /></ProtectedRoute>} />
         </Routes>
       </main>
+      <AdBanner />
       <Footer />
     </div>
   );
