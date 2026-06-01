@@ -35,7 +35,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2"><HiMail className="text-nacos-400" /> info@nacos.edu.ng</li>
               <li className="flex items-center gap-2"><HiPhone className="text-nacos-400" /> +234 800 NACOS</li>
-              <li className="flex items-center gap-2"><HiLocationMarker className="text-nacos-400" /> Federal Polytechnic, Nasarawa</li>
+              <li className="flex items-center gap-2"><HiLocationMarker className="text-nacos-400" /> Nasarawa State University, Keffi</li>
             </ul>
           </div>
         </div>
