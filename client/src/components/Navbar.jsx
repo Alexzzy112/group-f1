@@ -37,8 +37,7 @@ export default function Navbar() {
               <HiAcademicCap className="text-white text-xl" />
             </div>
             <span className="font-bold text-lg hidden sm:block">
-              <span className="gradient-text">NACOS</span>
-              <span className="text-gray-600 dark:text-gray-400"> Voting</span>
+              <span className="gradient-text">GroupF1</span>
             </span>
           </Link>
 
