@@ -125,3 +125,35 @@ exports.createAdmin = async (req, res) => {
     res.status(500).json({ message: 'Server error.' });
   }
 };
+
+exports.unlockAccount = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    if (!user.isLocked()) {
+      return res.json({ message: 'Account is not locked.' });
+    }
+
+    user.loginAttempts = 0;
+    user.lockUntil = undefined;
+    await user.save();
+
+    await logAudit({
+      user: req.user._id,
+      action: 'UNLOCK_ACCOUNT',
+      resource: 'User',
+      resourceId: id,
+      details: { unlockedUser: user.fullName, email: user.email },
+      ipAddress: req.ip,
+      userAgent: req.headers['user-agent'],
+    });
+
+    res.json({ message: `Account for ${user.fullName} unlocked successfully.` });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error.' });
+  }
+};

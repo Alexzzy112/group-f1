@@ -84,14 +84,22 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
+    if (user.lockUntil && user.lockUntil <= Date.now()) {
+      user.loginAttempts = 0;
+      user.lockUntil = undefined;
+      await user.save();
+    }
+
     if (user.isLocked()) {
-      return res.status(423).json({ message: 'Account locked. Try again later.' });
+      const remaining = Math.ceil((user.lockUntil - Date.now()) / 60000);
+      return res.status(423).json({ message: `Account locked. Try again in ${remaining} minute(s).` });
     }
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       user.loginAttempts += 1;
-      if (user.loginAttempts >= 5) {
+      const maxAttempts = user.role === 'superadmin' || user.role === 'admin' ? 10 : 5;
+      if (user.loginAttempts >= maxAttempts) {
         user.lockUntil = new Date(Date.now() + 15 * 60 * 1000);
       }
       await user.save();
